@@ -1,27 +1,27 @@
-import { useAuth } from '../context/AuthContext';
-import { Navigate, useNavigate } from 'react-router';
-import { useState } from 'react';
+import { useAuth } from "../context/AuthContext";
+import { Navigate, useNavigate } from "react-router";
+import { useState } from "react";
 
 const Login = () => {
   const { isAuthenticated, login } = useAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     const result = await login(email, password);
     if (result.success) {
-      navigate('/dashboard');
+      navigate("/dashboard");
     } else {
       setError(result.message);
     }
   };
 
   if (isAuthenticated) {
-    return <Navigate to='/dashboard' />;
+    return <Navigate to="/dashboard" />;
   }
 
   return (
@@ -67,6 +67,5 @@ const Login = () => {
     </>
   );
 };
-
 
 export default Login;
