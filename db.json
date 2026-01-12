@@ -1,16 +1,22 @@
 {
   "users": [
     {
-      "id": "1",
-      "email": "admin@admin.com",
-      "password": "admin",
-      "name": "Gonzalo"
-    },
-    {
       "id": "2",
       "email": "user@user.com",
       "password": "user",
       "name": "Usuario Test"
+    },
+    {
+      "id": "3",
+      "email": "user2@user.com",
+      "password": "user2",
+      "name": "Usuario Test 2"
+    },
+    {
+      "email": "admin@admin.com",
+      "password": "$2a$10$pQAhhSbWhUttgXne.mEvlOcrtV2Wbn0BSarBtinpxMroSkAVPrXe.",
+      "name": "Gonzalo Admin",
+      "id": "25nwFMb"
     }
   ],
   "tasks": [
@@ -25,6 +31,21 @@
       "title": "Tarea 2",
       "description": "Descripción de la tarea 2",
       "completed": true
+    },
+    {
+      "title": "tarea3",
+      "completed": false,
+      "id": "QVHapoe"
+    },
+    {
+      "title": "tarea4",
+      "completed": false,
+      "id": "QDwaNFI"
+    },
+    {
+      "title": "dsadasasd",
+      "completed": false,
+      "id": "CZMc3bc"
     }
   ]
 }

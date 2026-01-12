@@ -1,6 +1,6 @@
 # Lista de Tareas - RollingCode School
 
-Este proyecto es una aplicación de lista de tareas construida con React y Vite. Utiliza `json-server` para simular un backend (REST API) y manejar autenticación básica.
+Este proyecto es una aplicación de lista de tareas construida con React y Vite. Utiliza `json-server` con el middleware `json-server-auth` para simular un backend real con autenticación segura y persistencia de datos.
 
 ## 🚀 Cómo levantar el proyecto
 
@@ -17,12 +17,12 @@ npm install
 ```
 
 ### 3. Ejecutar la Aplicación
-Para que la aplicación funcione correctamente, necesitas correr tanto el **Frontend** (React) como el **Backend** (JSON Server).
+Para que la aplicación funcione correctamente, necesitas correr tanto el **Frontend** (React) como el **Backend** (JSON Server protegido).
 
 Recomendamos abrir **dos terminales**:
 
 **Terminal 1: JSON Server (Backend)**
-Este comando iniciará la base de datos simulada en el puerto 3004.
+Este comando iniciará la base de datos simulada en el puerto 3004 con seguridad habilitada.
 ```bash
 npm run server
 ```
@@ -33,30 +33,37 @@ Este comando iniciará la aplicación de React.
 npm run dev
 ```
 
-Una vez ejecutado, abre tu navegador en la URL que te indique la terminal (usualmente `http://localhost:5173`).
+Una vez ejecutado, abre tu navegador en `http://localhost:5173`.
 
 ---
 
-## 📝 Tareas Pendientes
-- [ ] Hacer que el login funcione con petición HTTP `POST`.
-- [ ] Implementar la creación de tareas guardándolas en `json-server`.
+## � Usuarios y Autenticación
+Debido a que usamos seguridad real, **ya no se pueden agregar usuarios manualmente en `db.json`** escribiendo la contraseña. Las contraseñas deben estar encriptadas.
 
-## 📚 Temas Vistos en Clase
-- **Context API**: Uso de `AuthContext` para manejar el estado global de la autenticación.
-- **Rutas Protegidas**: Implementación de seguridad para restringir el acceso a ciertas páginas (Dashboard) solo a usuarios logueados.
-- **JSON Server**: Configuración y uso para simular una API REST completa con autenticación.
-- **React Router**: Navegación entre páginas (Landing, Login, Register, Dashboard).
+### Usuario por defecto
+El proyecto viene con un usuario pre-configurado para pruebas:
+- **Email:** `admin@admin.com`
+- **Contraseña:** `admin`
+
+### Crear nuevos usuarios
+Para crear usuarios nuevos, debes usar el endpoint de registro (ya que la UI de registro aún no está implementada). Puedes hacerlo mediante Postman o curl:
+`POST http://localhost:3004/register`
 
 ---
 
-## Información Técnica (Vite)
-Este proyecto fue creado con el template de Vite. A continuación la documentación original del template:
+## ✅ Funcionalidades Completadas
+- [x] **Autenticación Real**: Login implementado usando petición HTTP `POST` a `/login`.
+- [x] **Tokens de Seguridad**: Manejo de `accessToken` en `localStorage` para persistir la sesión.
+- [x] **Listado de Tareas**: Visualización de tareas traídas del servidor mediante `useEffect` y `GET /tasks`.
+- [x] **Creación de Tareas**: Formulario funcional para agregar nuevas tareas mediante `POST /tasks`.
 
-### React + Vite
+## 📚 Temas Aplicados
+- **Context API**: Uso de `AuthContext` para estado global de autenticación.
+- **Hooks de React**: Manejo profundo de `useState` (formularios) y `useEffect` (llamadas a API).
+- **Rutas Protegidas**: Restricción de acceso al Dashboard usando `React Router`.
+- **JSON Server Auth**: Configuración de middleware de seguridad para simular un entorno profesional.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Información Técnica
+Este proyecto ejecuta `json-server` con el flag `-m node_modules/json-server-auth` para habilitar las reglas de seguridad (JWT) y proteger los endpoints.
